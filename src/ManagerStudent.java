@@ -63,19 +63,6 @@ public class ManagerStudent {
         } else {
             arr.remove(searchId(id));
         }
-//        boolean check = false;
-//        for (int i = 0; i < arr.size(); i++) {
-//            if (id == arr.get(i).getId()) {
-//                arr.remove(arr.get(i));
-//                check = true;
-//                break;
-//            }
-//        }
-//        if (check == false) {
-//            System.out.println("không có id này");
-//           }else {
-//               print(arr);
-//           }
     }
 
     public void edit(int id, Student student) {
