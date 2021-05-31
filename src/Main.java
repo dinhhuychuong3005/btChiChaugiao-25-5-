@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,10 +9,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         StudentFile studentFile = new StudentFile();
         ManagerStudent managerStudent = new ManagerStudent();
-        managerStudent.add(new Student(1,27,"chuong","Nam","ND","TQT"));
-        managerStudent.add(new Student(2,23,"phong","Nam","ND","codegym"));
-        managerStudent.add(new Student(3,24,"chien","Nam","ND","codegym"));
-        managerStudent.add(new Student(4,27,"tuyen","Nữ","ND","TQT"));
+
+        managerStudent.add(new Student(1, 27, "chuong", "Nam", "ND", "TQT"));
+        managerStudent.add(new Student(2, 23, "phong", "Nam", "ND", "codegym"));
+        managerStudent.add(new Student(3, 24, "chien", "Nam", "ND", "codegym"));
+        managerStudent.add(new Student(4, 27, "tuyen", "Nữ", "ND", "TQT"));
+
         while (true) {
             System.out.println("======Menu=====");
             System.out.println("1: Thêm học sinh");
@@ -40,13 +43,16 @@ public class Main {
                     System.out.println("Nhập trường:");
                     String school = scanner.nextLine();
                     managerStudent.add(new Student(id, age, name, gender, address, school));
+                    studentFile.writerFile("abc.csv", managerStudent.getArr());
+
                     break;
                 }
                 case 2: {
-                    managerStudent.print(managerStudent.getArr());
+                    managerStudent.print(studentFile.readFile("abc.csv"));
                     break;
                 }
                 case 3: {
+                    managerStudent.setArr(studentFile.readFile("abc.csv"));
                     System.out.println("a.Tìm kiếm theo id");
                     System.out.println("b.Tìm kiếm theo tên");
                     System.out.println("c.Tìm kiếm theo tuổi");
@@ -94,6 +100,7 @@ public class Main {
                     int id = scanner.nextInt();
                     managerStudent.delete(id);
                     managerStudent.print(managerStudent.getArr());
+                    studentFile.writerFile("abc.csv", managerStudent.getArr());
                     break;
                 }
                 case 5: {
@@ -111,6 +118,7 @@ public class Main {
                     String school = scanner.nextLine();
                     managerStudent.edit(id, new Student(id, age, name, gender, address, school));
                     managerStudent.print(managerStudent.getArr());
+                    studentFile.writerFile("abc.csv", managerStudent.getArr());
                     break;
                 }
                 case 6: {
@@ -121,11 +129,13 @@ public class Main {
                         case 1: {
                             managerStudent.sortID();
                             managerStudent.print(managerStudent.getArr());
+                            studentFile.writerFile("abc.csv", managerStudent.getArr());
                             break;
                         }
                         case 2: {
                             managerStudent.sort();
                             managerStudent.print(managerStudent.getArr());
+                            studentFile.writerFile("abc.csv", managerStudent.getArr());
                             break;
                         }
                         default:
@@ -136,14 +146,6 @@ public class Main {
                 }
                 case 7: {
                     System.exit(0);
-                    break;
-                }
-                case 8:{
-                    studentFile.writerFile("abc.csv", managerStudent.getArr());
-                    break;
-                }
-                case 9:{
-                    studentFile.readFile();
                     break;
                 }
                 default:
